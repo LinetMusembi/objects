@@ -6,19 +6,15 @@
    { name: 'Charlie', age: 14 },
    { name: 'Max', age: 19 },
  ];
- const maxAge=18
-
+ 
  const aboveAge =(people) => {
     const above18years = []
     for(let i=0;i<people.length;i++){
-        if((people[1].age>=18)){
-            below18years.push(i)
-        }
-        else{
-            above18years.push()
+        if((people[i].age>=18)){
+            above18years.push(i)
         }
     }
-    return below18years;
+    return above18years;
 
  }
  console.log(aboveAge(people))
@@ -26,29 +22,65 @@
  
 
 
-// 2.rite a function that takes an array of objects, where each object represents a product with a name, price, and category property. The function should return an object that groups the products by their categories, with the category names as keys and the arrays of products as values.
-// const products = [
-//     { name: 'Laptop', price: 1200, category: 'Electronics' },
-//     { name: 'Shirt', price: 25, category: 'Clothing' },
-//     { name: 'Headphones', price: 80, category: 'Electronics' },
-//     { name: 'Shoes', price: 60, category: 'Clothing' },
-//   ];
+// 2.Write a function that takes an array of objects, where each object represents 
+// a product with a name, price, and category property. The function should return an object 
+// that groups the products by their categories, with the category names as keys and the arrays of products as values.
+const products = [
+    { name: 'Laptop', price: 1200, category: 'Electronics' },
+    { name: 'Shirt', price: 25, category: 'Clothing' },
+    { name: 'Headphones', price: 80, category: 'Electronics' },
+    { name: 'Shoes', price: 60, category: 'Clothing' },
+  ];
+  const groupCategory = products.reduce((group,product)=> {
+    const{category} = product;
+    group[category] = group[category]??[];
+    group[category].push(product)
+    return group;
+  },
+  {})
+  console.log(groupCategory);
 
 
-// 3.Given an array of objects, where each object represents a student with a name and an array of scores, write a function that returns a new array containing the names of all students whose average score is greater than or equal to 85.
-// const students = [
-//     { name: 'John', scores: [90, 80, 85] },
-//     { name: 'Jane', scores: [95, 92, 88] },
-//     { name: 'Jim', scores: [70, 80, 75] },
-//     { name: 'Jill', scores: [85, 90, 84] },
-//   ];
 
-// 4.Given an object representing a car, with properties for the make, model, year, and a method to display the car's information, write a function that takes the car object and adds a new method to the object called age. The age method should return the current age of the car based on the current year and the car's year property.
-// const car = {
-//     make: 'Ford',
-//     model: 'Ranger',
-//     year: 2023,
-//     displayInfo: function() {
-//       console.log(`Make: ${this.make}, Model: ${this.model}, Year: ${this.year}`);
-//     },
-//   };
+
+// 3.Given an array of objects, where each object represents a student with a name
+//  and an array of scores, write a function that returns a new array containing the
+//   names of all students whose average score is greater than or equal to 85.
+const students = [
+    { name: 'John', scores: [90, 80, 85] },
+    { name: 'Jane', scores: [95, 92, 88] },
+    { name: 'Jim', scores: [70, 80, 75] },
+    { name: 'Jill', scores: [85, 90, 84] },
+  ];
+  function avarageScores() {
+    let avarage=[]
+    for (let i = 0; i < students.length; i++) {
+      let avg = students[i].scores.reduce((total,next) => total + next) /students[i].scores.length;
+      if(avg>85) {
+        avarage.push(students[i].name)
+      }
+      
+    }
+    return avarage
+  }
+  console.log(avarageScores());
+
+// 4.Given an object representing a car, with properties for the make, model, year,
+// and a method to display the car's information, write a function that takes the car 
+//  object and adds a new method to the object called age. The age method should return 
+//  the current age of the car based on the current year and the car's year property.
+const car = {
+  make: 'Ford',
+  model: 'Ranger',
+  year: 2023,
+  displayInfo: function() {
+   console.log(`Make: ${this.make}, Model: ${this.model}, Year: ${this.year}`);
+  },
+};
+function carObject(newYear){
+  car.age = newYear-car["year"]
+}
+car.displayInfo()
+console.log(car);  
+  
+  
